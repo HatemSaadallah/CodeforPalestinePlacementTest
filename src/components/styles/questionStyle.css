@@ -1,0 +1,19 @@
+.question{
+  direction: rtl;
+}
+
+.form {
+  resize: none;
+  width: 90%;
+  margin: 0 auto;
+  display: block;
+  height: 15em;
+  direction: rtl;
+}
+
+.nextButton {
+  margin: 3em auto;
+  display: block;
+  position: relative;
+  bottom: 1em;
+}
