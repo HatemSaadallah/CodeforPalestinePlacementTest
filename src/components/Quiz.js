@@ -6,6 +6,9 @@ import QuestionCount from '../components/QuestionCount';
 import AnswerOption from '../components/AnswerOption';
 import GoBack from '../components/GoBack';
 
+
+// This function returns the whole question combined
+// CSSTransitionGroup is making animation when there's a transition
 function Quiz(props) {
   function renderAnswerOptions(key) {
     return (

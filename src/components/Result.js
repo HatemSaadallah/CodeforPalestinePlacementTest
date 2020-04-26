@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import { CSSTransitionGroup } from 'react-transition-group';
 import './styles/resultStyle.css';
 
+
+// This is the component responsiple for returning the results
 function Result(props) {
   return (
     <CSSTransitionGroup

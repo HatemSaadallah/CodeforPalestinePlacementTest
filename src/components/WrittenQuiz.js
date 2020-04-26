@@ -8,6 +8,8 @@ import GoBack from '../components/GoBack';
 // import { TextField } from '@material-ui/core';
 import './styles/questionStyle.css';
 
+
+// Component of written question
 function WrittenQuiz(props){
   return(
     <CSSTransitionGroup

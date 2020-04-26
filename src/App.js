@@ -10,15 +10,21 @@ import GoBack from './components/GoBack';
 import WrittenQuiz from './components/WrittenQuiz';
 
 import './components/styles/appStyle.css';
+
+// This vriable is used to store the previous answer of the question, when the user goes back, it will use this value
 var userAnswerPrev;
+
+// Prompt the username
 let name = prompt("الرجاء أدخل الاسم:");
+
+
 class App extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      counter: 0,
-      questionId: 1,
+      counter: 0, // This is used as a question counter
+      questionId: 1, // This is a question ID
       question: '',
       answerOptions: [],
       answer: '',
@@ -29,6 +35,8 @@ class App extends Component {
     this.handleAnswerSelected = this.handleAnswerSelected.bind(this);
     this.setPreviousQuestion = this.setPreviousQuestion.bind(this);
   }
+
+  // Whenever a component mounts, the answers will be shuffled so they will not be the same
   componentDidMount() {
     const shuffledAnswerOptions = quizQuestions.map(question =>
       this.shuffleArray(question.answers)
@@ -38,7 +46,7 @@ class App extends Component {
       answerOptions: shuffledAnswerOptions[0]
     });
   }
-
+// This function is used to shuffle things, I used it to shuffle answers, could be used to shuffle questions as well, havn't tried it yet.
   shuffleArray(array) {
     var currentIndex = array.length,
       temporaryValue,
@@ -58,6 +66,7 @@ class App extends Component {
     return array;
   }
 
+  // This function sets the answer the user entered while inserting the initial values of the state
   handleAnswerSelected(event) {
     this.setUserAnswer(event.currentTarget.value);
     userAnswerPrev = event.currentTarget.value;
@@ -72,6 +81,7 @@ class App extends Component {
     }
   }
 
+  // This function is used to append the data the user entered to the existing answers, I used the three dots to take the existing values and add up to them.
   setUserAnswer(answer) {
     this.setState((state, props) => ({
       answersCount: {
@@ -82,6 +92,8 @@ class App extends Component {
     }));
   }
 
+
+  // This function does the opposite of the previous one, it removes the answer and subtract 1 from answersCount so it will go back the previous question.
   removeUserAnswer(answer) {
     this.setState((state, props) => ({
       answersCount: {
@@ -92,12 +104,13 @@ class App extends Component {
     }));
   }
 
+// This function is deprecated, there's no need for it, I am keeping it for a purpose but will remove it asap.
   setWrittenQuestion() {
     const counter = this.state.counter + 1;
     const questionId = this.state.questionId + 1;
-
   }
 
+  // This function adds up one to counter and questonId in the state store whenever the user inputs his answer
   setNextQuestion() {
     const counter = this.state.counter + 1;
     const questionId = this.state.questionId + 1;
@@ -111,7 +124,7 @@ class App extends Component {
     });
   }
 
-
+  // This function does the same as the previous one but there some options that are not needed because it's a written question, will optimize it as soon as I figure this shit out
   setNextWrittenQuestion() {
     const counter = this.state.counter + 1;
     const questionId = this.state.questionId + 1;
@@ -125,6 +138,7 @@ class App extends Component {
     });
   }
 
+  // Same as the previous one with minus sign.
 
   setPreviousQuestion(event) {
     const counter = this.state.counter - 1;
@@ -142,6 +156,7 @@ class App extends Component {
     });
   }
 
+  // This function returns the results the user did input.
   getResults() {
     const answersCount = this.state.answersCount;
     const answersCountKeys = Object.keys(answersCount);
@@ -152,6 +167,7 @@ class App extends Component {
     return answersCount;
   }
 
+  // This function sets a value to result that is the state store, and when result change, it will show the results.
   setResults(result) {
     // if (result.length === 1) {
       this.setState({ result: result });
@@ -160,7 +176,7 @@ class App extends Component {
     // }
   }
 
-
+  // This function returns the component the return the MCQ questions
   renderQuiz() {
     return (
       <div>
@@ -177,6 +193,8 @@ class App extends Component {
       </div>
     );
   }
+
+  // This function returns the componentthe returns the written questions
   renderWritten() {
     return (
       // <Question content="The first question" />
@@ -193,17 +211,19 @@ class App extends Component {
       />
     );
   }
+
+  // This function returns the results
   renderResult() {
     return <Result quizResult={JSON.stringify(this.state.result)} />;
   }
+
+  // This function is responsiple of rendering the content in the page
   rendering(){
     if (this.state.counter < 5) {
       return this.renderQuiz();
-    } else if (this.state.counter > 5){
-
+    } else if (this.state.counter >= 5){
       return this.renderWritten();
     }
-
     return this.renderResult();
     // return this.state.result ? this.renderResult() : this.renderQuiz()
   }
