@@ -10,7 +10,7 @@
     "react": "^16.8.2",
     "react-bootstrap": "^1.0.1",
     "react-dom": "^16.8.2",
-    "react-scripts": "2.0.4",
+    "react-scripts": "5.0.1",
     "react-stopwatch": "^2.0.4",
     "react-textarea-count": "^1.0.3",
     "react-transition-group": "^1.2.1"
